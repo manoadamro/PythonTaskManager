@@ -1,5 +1,67 @@
 # PythonTaskManager
 
+## TaskManager:
+      
+  TaskManager is responsible for queuing tasks and executing them when required.
+  Tasks can be queued in two different ways.
+  
+  ### Add Task  
+  enqueues a task to be executed immediately.  
+  Tasks are usually added through a Module class, although they can be added directly via task manager.
+  this will require a dictionary with the following keys
+  
+            {
+              'method': method,     # the method to call,
+                                    # can NOT be None
+                                    
+              'args': args,         # args to pass to the method
+                                    # can be None
+              
+              'kwargs': kwargs,     # keyword args to pass to the method,
+                                    # can be None
+              
+              'callback': callback, # called when method completes, 
+                                    #takes one arg (the return from method),
+                                    # can be None or list                                
+            }
+           
+  
+  ### Schedule Task
+  enqueues a task to be executed at a given time or interval.
+  Tasks are usually scheduled through a Module class as well, although they can too be added directly via task manager.
+  this will require a dictionary with the following keys
+
+            {
+              'method': method,           # the method to call,
+                                          # can NOT be None
+                                    
+              'args': [list],             # args to pass to the method
+                                          # can be None
+              
+              'kwargs': {dict},           # keyword args to pass to the method,
+                                          # can be None
+              
+              'callback': method,         # called when method completes, 
+                                          #takes one arg (the return from method),
+                                          # can be None or list 
+         
+              'delay': number,            # number of seconds to wait before executing
+                                          # if reoccurring,
+                                          # it will also act as the number of seconds interval between executions
+              
+              'reoccurring': reoccurring, # if false, the task will only execute once, then be deleted
+                                          # if true, the task will execute every {delay} seconds
+                                          
+              'run_now': run_now,         # should the task also be run immediately?
+              
+            }
+
+## Module:
+
+   *to do*
+
+# Example
+
       from taskmanager import TaskManager, Module
       
       
