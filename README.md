@@ -1,6 +1,10 @@
 # PythonTaskManager
 
+            from taskmanager import TaskManager, Module
+
 ## TaskManager:
+      
+      manager = TaskManager()
       
   TaskManager is responsible for queuing tasks and executing them when required.
   Tasks can be queued in two different ways.
@@ -11,18 +15,18 @@
   this will require a dictionary with the following keys
   
             {
-              'method': method,     # the method to call,
-                                    # can NOT be None
+              'method': method,           # the method to call,
+                                          # can NOT be None
                                     
-              'args': args,         # args to pass to the method
-                                    # can be None
+              'args': [list],             # args to pass to the method
+                                          # can be None
               
-              'kwargs': kwargs,     # keyword args to pass to the method,
-                                    # can be None
+              'kwargs': {dict},           # keyword args to pass to the method,
+                                          # can be None
               
-              'callback': callback, # called when method completes, 
-                                    #takes one arg (the return from method),
-                                    # can be None or list                                
+              'callback': method,         # called when method completes, 
+                                          # takes one arg (the return from method),
+                                          # can be None or list                                
             }
            
   
@@ -58,7 +62,21 @@
 
 ## Module:
 
-   *to do*
+      my_module = Module( task_manager=, max_workers= )
+      
+  ### Args & Kwargs
+  
+  * __task_manager TaskManager__: a reference to a task manager instance
+  * __max_workers int__: the maximum number of threads a module is allowed at any one time
+  
+  ### Add Task:  
+  
+  *to do*  
+  
+  ### Schedule Task:
+
+  *to do*
+
 
 # Example
 
@@ -79,10 +97,10 @@
           print(data)
           
       
-      task_manager = TaskManager()
-      task_manager.start_thread()
+      manager = TaskManager()
+      manager.start_thread()
       
-      something = SomeModule(task_manager=task_manager, max_workers=5)
+      something = SomeModule(task_manager=manager, max_workers=5)
       
       
       # will create a task to be run asap
