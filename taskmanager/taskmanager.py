@@ -46,6 +46,13 @@ class TaskManager(Pool):
             - The task to schedule
         """
 
+        # when adding a task directly,
+        # there is no need to specify the time
+        # it is always calculated this way
+        if 'time' not in task:
+            
+            task['time'] = time() + delay
+        
         # call method in TaskScheduler instance
         self.scheduler.schedule_task(task)
 
