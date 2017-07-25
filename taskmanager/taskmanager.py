@@ -65,21 +65,38 @@ class TaskManager(Pool):
         # loop through all task until we find one we can use
         for task in self._queue:
 
-            # if we can find a worker on this module
-            this_worker = task['module'].get_worker()
-            if this_worker is not None:
+            # if the task has been added through a module,
+            # it must adhere to the module limit
+            if "module" in task:
+            
+                # if we can find a worker on this module
+                this_worker = task['module'].get_worker()
+                if this_worker is not None:
 
-                # remove the task from the queue
-                self.remove(task)
+                    # remove the task from the queue
+                    self.remove(task)
 
-                # set the ask in the worker
-                this_worker.set_task(task)
+                    # set the ask in the worker
+                    this_worker.set_task(task)
 
-                # run the task on a new thread
-                Thread(target=this_worker.run_task).start()
+                    # run the task on a new thread
+                    Thread(target=this_worker.run_task).start()
 
-                # stop searching for usable task
-                break
+                    # stop searching for usable task
+                    break
+        
+            # the task was added directly
+            # no limits to adhere to
+            else:
+                
+                # create a temp worker
+                worker = Worker(None)
+
+                # set the task within the worker
+                worker.set_task(task)
+
+                # run task on new thread
+                Thread(target=worker.run_task).start()        
 
         # sleep thread based on state
         self._sleep()
