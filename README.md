@@ -70,8 +70,8 @@ ___
       
   ### Args & Kwargs
   
-        __task_manager TaskManager__: a reference to a task manager instance
-        __max_workers int__: the maximum number of threads a module is allowed at any one time
+        task_manager TaskManager: a reference to a task manager instance
+        max_workers int: the maximum number of threads a module is allowed at any one time
   
   ### Add Task:  
   
