@@ -164,12 +164,12 @@ ___
       
       # will create a task to be run in one second
       # some_event prints "hello" after 1 second
-      schedule_task(something.some_event, 1, args=None, kwargs=None, callback=None, reoccurring=False, run_now=False)
+      schedule_task(something.some_event, 1, args=("hello",), kwargs=None, callback=None, reoccurring=False, run_now=False)
       
       # will create a task to be run every one second
       # some_event prints "hello" every 1 second, starting in 1 second
-      schedule_task(something.some_event, 1, args=None, kwargs=None, callback=None, reoccurring=True, run_now=False)
+      schedule_task(something.some_event, 1, args=("hello",), kwargs=None, callback=None, reoccurring=True, run_now=False)
       
       # will create a task to be run every one second
       # some_event prints "hello" every 1 second, runs it now too
-      schedule_task(something.some_event, 1, args=None, kwargs=None, callback=None, reoccurring=True, run_now=True)
+      schedule_task(something.some_event, 1, args=("hello",), kwargs=None, callback=None, reoccurring=True, run_now=True)
